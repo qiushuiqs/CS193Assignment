@@ -101,15 +101,12 @@
         }else if ([self isSingleOperarandOperation:operation]) {
             return [[[topNode stringByAppendingString:@"("] stringByAppendingString:[self descriptionOfTopOfStack:stack withVariable:(NSArray *)variableList]] stringByAppendingString:@")"];
         }
-    }else if (variableList) {
+    }else if ([topNode isEqual: @"x"]) {
         NSString* variable = topNode;    //transfer ID to NSString *
-        if([variableList containsObject:variable])
-            return variable; 
-    }else if (topNode==nil){
-        return @"";
+        return variable; 
     }
     
-    return @"ERROR";
+    return @"Error";
 }
 
 +(BOOL) isTwoOperandOperation:(id) operation{
@@ -132,15 +129,7 @@
     return NO;
 }
 
-/*
--(double)popOperand{
-    NSString *operandNode = [self.operandStack lastObject];
-    if (operandNode) {
-        [self.operandStack removeLastObject];
-    }
-    return [operandNode doubleValue];
-}
-*/
+
 
 //made a immitation for programstack and process on the immitation
 - (id) program{
@@ -184,7 +173,6 @@
     id topNode = [stack lastObject];
     if(topNode){
         [stack removeLastObject];
-        NSLog(@"last node is = %@ how many left %i", [stack lastObject],[stack count]);
     }
     
     if ([topNode isKindOfClass:[NSNumber class]]) {
@@ -199,7 +187,7 @@
         }else if ([operation isEqualToString:@"/"]) {
             double divisor = [self popAllOperand:stack];
             if (divisor) result = [self popAllOperand:stack] / divisor;
-        }else if ([operation isEqualToString:@"-"]){
+                   }else if ([operation isEqualToString:@"-"]){
             double subtrahend = [self popAllOperand:stack];
             result = [self popAllOperand:stack] - subtrahend;
         }else if ([operation isEqualToString:@"sqrt"]) {

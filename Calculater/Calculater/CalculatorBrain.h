@@ -16,11 +16,11 @@
 -(NSString *)showTheDescription;
 -(NSString *)removeLastOperand;
 
-@property (readonly) id program;   //program can be operator or operand,we cannot change the value of that, so it is readonly
 
-//variable dictionary
+//Program is always guaranteed to be a Property List 
+
+@property (readonly) id program;   //program can be operator or operand,we cannot change the value of that, so it is readonly variable dictionary
 @property (nonatomic) NSDictionary *testVariableValues;
-//@property (readonly) NSDictionary* programVariable;
 
 +(double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues;    
 
